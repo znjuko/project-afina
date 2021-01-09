@@ -1,6 +1,8 @@
 package parcer
 
+import "project-afina/pkg/models/excel-data"
+
 type Caster interface {
-	Cast(d *StoredData, parsedData []string) (err error)
+	Cast(d *excel_data.StoredData, parsedData []string) (err error)
 	Next(caster Caster)
 }

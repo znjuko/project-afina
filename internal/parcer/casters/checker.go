@@ -2,6 +2,7 @@ package casters
 
 import (
 	"project-afina/internal/parcer"
+	"project-afina/pkg/models/excel-data"
 
 	"errors"
 )
@@ -11,7 +12,7 @@ type ColumnsChecker struct {
 	next       parcer.Caster
 }
 
-func (c *ColumnsChecker) Cast(d *parcer.StoredData, parsedData []string) (err error) {
+func (c *ColumnsChecker) Cast(d *excel_data.StoredData, parsedData []string) (err error) {
 	if len(parsedData) < c.minColumns {
 		return errors.New("this rows is too short")
 	}

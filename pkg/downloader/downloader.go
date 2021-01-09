@@ -21,6 +21,10 @@ const (
 	minimalFileExtensionSize = 2
 )
 
+type DataDownloader interface {
+	DownloadFile(url string) (path, extension string, err error)
+}
+
 type Downloader struct {
 	allowedExtensions map[string]struct{}
 	// dir/%s:{random value}/%s:{stored filename from url}

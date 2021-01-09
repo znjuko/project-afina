@@ -4,24 +4,26 @@ import (
 	"fmt"
 
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
+
+	"project-afina/pkg/models/excel-data"
 )
 
 type Parser interface {
-	ParseFile(filepath string) (data *ParsedData, err error)
+	ParseFile(filepath string) (data *excel_data.ParsedData, err error)
 }
 
 type ExcelDataParser struct {
 	castersChain Caster
 }
 
-func (p *ExcelDataParser) ParseFile(filepath string) (data *ParsedData, err error) {
+func (p *ExcelDataParser) ParseFile(filepath string) (data *excel_data.ParsedData, err error) {
 	table, err := excelize.OpenFile(filepath)
 	if err != nil {
 		fmt.Println(err)
 		return data, err
 	}
 
-	data = new(ParsedData)
+	data = new(excel_data.ParsedData)
 	// TODO : parallel !!!!!
 	for _, sheetName := range table.GetSheetMap() {
 		rows, err := table.Rows(sheetName)
@@ -35,7 +37,7 @@ func (p *ExcelDataParser) ParseFile(filepath string) (data *ParsedData, err erro
 				return data, err
 			}
 
-			stored := new(StoredData)
+			stored := new(excel_data.StoredData)
 			if err = p.castersChain.Cast(stored, row); err != nil {
 				data.ParsingFailure++
 				continue

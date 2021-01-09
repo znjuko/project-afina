@@ -12,4 +12,3 @@ func main() {
 	d = d[1:]
 	fmt.Println(d)
 }
-

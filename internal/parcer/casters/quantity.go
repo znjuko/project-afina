@@ -4,13 +4,14 @@ import (
 	"strconv"
 
 	"project-afina/internal/parcer"
+	"project-afina/pkg/models/excel-data"
 )
 
 type QuantityCuster struct {
 	next parcer.Caster
 }
 
-func (c *QuantityCuster) Cast(d *parcer.StoredData, parsedData []string) (err error) {
+func (c *QuantityCuster) Cast(d *excel_data.StoredData, parsedData []string) (err error) {
 	if d.Quantity, err = strconv.ParseInt(parsedData[0], 10, 64); err != nil {
 		return
 	}
